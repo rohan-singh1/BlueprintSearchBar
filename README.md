@@ -15,3 +15,5 @@ The Blueprint Search Bar plugin exposes the functionality of the powerful Slate 
 
 
 Screenshot:
+
+![image](https://github.com/rohan-singh1/BlueprintSearchBar/blob/5e485ddb738665706f49c7d9e158a8a69fb4d76a/Resources/Screenshot.png)
