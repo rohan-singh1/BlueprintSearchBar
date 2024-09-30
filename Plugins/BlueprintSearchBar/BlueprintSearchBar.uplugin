@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Blueprint Search Bar",
+	"Description": "The native Slate-based search bar of Unreal Engine exposed to Blueprints",
+	"Category": "UI",
+	"CreatedBy": "Rohan Singh",
+	"CreatedByURL": "https://www.linkedin.com/in/rohan-sierra/",
+	"DocsURL": "https://github.com/rohan-singh1/BlueprintSearchBar",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "BlueprintSearchBar",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
