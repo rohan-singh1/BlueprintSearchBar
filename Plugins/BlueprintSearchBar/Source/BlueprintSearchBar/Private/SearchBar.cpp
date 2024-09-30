@@ -41,17 +41,11 @@ TSharedRef<SWidget> USearchBar::RebuildWidget()
         .InitialText(InitialText)
         .OnTextChanged_Lambda([this](const FText& InSearchText)
             {
-                if (this)
-                {
-                    HandleSearchTextChanged(InSearchText);  // Call the function safely
-                }
+                HandleSearchTextChanged(InSearchText);  // Call the function safely
             })
         .OnTextCommitted_Lambda([this](const FText& InSearchText, ETextCommit::Type CommitType)
             {
-                if (this)
-                {
-                    HandleSearchTextCommitted(InSearchText, CommitType);  // Call the function safely
-                }
+                HandleSearchTextCommitted(InSearchText, CommitType);  // Call the function safely
             });
 
             return SlateSearchWidget.ToSharedRef();
