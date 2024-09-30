@@ -8,8 +8,9 @@
 	"CreatedBy": "Rohan Singh",
 	"CreatedByURL": "https://www.linkedin.com/in/rohan-sierra/",
 	"DocsURL": "https://github.com/rohan-singh1/BlueprintSearchBar",
-	"MarketplaceURL": "",
+	"FabURL": "com.epicgames.launcher://ue/Fab/product/adffee62-48b7-4b37-a7e9-b9c58d017a6b",
 	"SupportURL": "",
+	"EngineVersion": "5.4.0",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
@@ -18,7 +19,14 @@
 		{
 			"Name": "BlueprintSearchBar",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64",
+				"Mac",
+				"Linux",
+				"IOS",
+				"Android",
+			]
 		}
 	]
 }
