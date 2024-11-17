@@ -29,18 +29,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/Widget.h"
-#include "Framework/Application/SlateApplication.h"
-#include "Widgets/Input/SSearchBox.h"
 #include "SearchBar.generated.h"
 
-
-// Declare a dynamic multicast delegate for search text changes
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSearchTextChanged, const FText&, Text);
-
-// Declare a dynamic multicast delegate for search text commit
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSearchTextCommitted, const FText&, Text, ETextCommit::Type, CommitType);
-
-
+class SSearchBox;
 
 /**
  *
@@ -59,6 +50,12 @@ public:
 
 	// Constructor
 	USearchBar(const FObjectInitializer& ObjectInitializer);
+
+	// Declare a dynamic multicast delegate for search text changes
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSearchTextChanged, const FText&, Text);
+
+	// Declare a dynamic multicast delegate for search text commit
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSearchTextCommitted, const FText&, Text, ETextCommit::Type, CommitType);
 
 	// Initial text (if any)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn = true), Category = "Blueprint Search Bar")

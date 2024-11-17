@@ -27,6 +27,8 @@
 
 
 #include "SearchBar.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Widgets/Input/SSearchBox.h"
 
 USearchBar::USearchBar(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
