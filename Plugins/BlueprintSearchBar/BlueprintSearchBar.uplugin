@@ -10,7 +10,7 @@
 	"DocsURL": "https://github.com/rohan-singh1/BlueprintSearchBar",
 	"FabURL": "com.epicgames.launcher://ue/Fab/product/adffee62-48b7-4b37-a7e9-b9c58d017a6b",
 	"SupportURL": "",
-	"EngineVersion": "5.4.0",
+	"EngineVersion": "5.5.0",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
