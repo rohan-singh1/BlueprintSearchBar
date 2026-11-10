@@ -26,48 +26,107 @@
 // THE SOFTWARE.
 
 
+
 #include "SearchBar.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Widgets/Input/SSearchBox.h"
 
+#define LOCTEXT_NAMESPACE "BlueprintSearchBar"
+
 USearchBar::USearchBar(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-    
+	HintText = LOCTEXT("DefaultHint", "Search");
 }
 
 TSharedRef<SWidget> USearchBar::RebuildWidget()
 {
-    // Create the Slate search bar widget
-    SlateSearchWidget = SNew(SSearchBox)
-        .InitialText(InitialText)
-        .OnTextChanged_Lambda([this](const FText& InSearchText)
-            {
-                HandleSearchTextChanged(InSearchText);  // Call the function safely
-            })
-        .OnTextCommitted_Lambda([this](const FText& InSearchText, ETextCommit::Type CommitType)
-            {
-                HandleSearchTextCommitted(InSearchText, CommitType);  // Call the function safely
-            });
-    return SlateSearchWidget.ToSharedRef();
+	SlateSearchWidget = SNew(SSearchBox)
+		.InitialText(InitialText)
+		.HintText(HintText)
+		.SelectAllTextWhenFocused(bSelectAllTextWhenFocused)
+		.DelayChangeNotificationsWhileTyping(bDelayChangeNotificationsWhileTyping)
+		.DelayChangeNotificationsWhileTypingSeconds(DelayChangeNotificationsSeconds)
+		.MinDesiredWidth(MinDesiredWidth)
+		// UObject-bound delegates are skipped safely if this widget has been garbage collected.
+		.OnTextChanged(FOnTextChanged::CreateUObject(this, &USearchBar::HandleSearchTextChanged))
+		.OnTextCommitted(FOnTextCommitted::CreateUObject(this, &USearchBar::HandleSearchTextCommitted));
+
+	return SlateSearchWidget.ToSharedRef();
+}
+
+void USearchBar::SynchronizeProperties()
+{
+	Super::SynchronizeProperties();
+
+	if (SlateSearchWidget.IsValid())
+	{
+		SlateSearchWidget->SetHintText(HintText);
+	}
 }
 
 void USearchBar::ReleaseSlateResources(bool bReleaseChildren)
 {
-    Super::ReleaseSlateResources(bReleaseChildren);
+	Super::ReleaseSlateResources(bReleaseChildren);
+	SlateSearchWidget.Reset();
+}
 
-    // Reset the Slate search box widget to release it from memory
-    SlateSearchWidget.Reset();
+FText USearchBar::GetText() const
+{
+	return SlateSearchWidget.IsValid() ? SlateSearchWidget->GetText() : InitialText;
+}
+
+void USearchBar::SetText(const FText& InText)
+{
+	InitialText = InText;
+	if (SlateSearchWidget.IsValid())
+	{
+		SlateSearchWidget->SetText(InText);
+	}
+}
+
+void USearchBar::ClearText()
+{
+	SetText(FText::GetEmpty());
+}
+
+FText USearchBar::GetHintText() const
+{
+	return HintText;
+}
+
+void USearchBar::SetHintText(const FText& InHintText)
+{
+	HintText = InHintText;
+	if (SlateSearchWidget.IsValid())
+	{
+		SlateSearchWidget->SetHintText(InHintText);
+	}
+}
+
+void USearchBar::FocusSearchBar()
+{
+	if (SlateSearchWidget.IsValid() && FSlateApplication::IsInitialized())
+	{
+		FSlateApplication::Get().SetKeyboardFocus(SlateSearchWidget, EFocusCause::SetDirectly);
+	}
 }
 
 void USearchBar::HandleSearchTextChanged(const FText& InSearchText)
 {
-    // Broadcast changed text to be intercepted by Blueprints
-    OnSearchTextChanged.Broadcast(InSearchText);
+	OnSearchTextChanged.Broadcast(InSearchText);
 }
 
 void USearchBar::HandleSearchTextCommitted(const FText& InSearchText, ETextCommit::Type CommitType)
 {
-    // Broadcast committed text and commit type to be intercepted by Blueprints
-    OnSearchTextCommitted.Broadcast(InSearchText, CommitType);
+	OnSearchTextCommitted.Broadcast(InSearchText, CommitType);
 }
+
+#if WITH_EDITOR
+const FText USearchBar::GetPaletteCategory()
+{
+	return LOCTEXT("PaletteCategory", "Input");
+}
+#endif
+
+#undef LOCTEXT_NAMESPACE

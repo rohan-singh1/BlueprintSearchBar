@@ -1,9 +1,9 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
+	"Version": 2,
+	"VersionName": "1.1",
 	"FriendlyName": "Blueprint Search Bar",
-	"Description": "The native Slate-based search bar of Unreal Engine exposed to Blueprints",
+	"Description": "The native Slate search bar exposed to Blueprints: get/set/clear text, hint text, focus, and change/commit events",
 	"Category": "UI",
 	"CreatedBy": "Rohan Singh",
 	"CreatedByURL": "https://www.linkedin.com/in/rohan-sierra/",
@@ -25,7 +25,7 @@
 				"Mac",
 				"Linux",
 				"IOS",
-				"Android",
+				"Android"
 			]
 		}
 	]
