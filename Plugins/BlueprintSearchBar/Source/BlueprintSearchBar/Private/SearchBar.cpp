@@ -49,9 +49,6 @@ TSharedRef<SWidget> USearchBar::RebuildWidget()
             {
                 HandleSearchTextCommitted(InSearchText, CommitType);  // Call the function safely
             });
-
-            return SlateSearchWidget.ToSharedRef();
-
     return SlateSearchWidget.ToSharedRef();
 }
 
